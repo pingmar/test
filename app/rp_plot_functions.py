@@ -40,8 +40,8 @@ def make_graph(ids, ff, title, padding=[None,None,None,None]):
         pitch.text(50+2*i, -20, f'{label}: {name}', va='center', ha='center', ax=axs['pitch'])
     elif tp == 'corner':
       df_shot_event = events[events.id == ID].dropna(axis=1, how='all').copy()
-      team1 = df_shot_event.team_name.iloc[0]
-      team2 = list(set(events.team_name.unique()) - {team1})[0]
+      team1 = df_shot_event.team.iloc[0]
+      team2 = 'Netherlands' if team1 == 'Ukraine' else 'Ukraine'
       COLOR_1 = COLOR_U if team1 == 'Ukraine' else COLOR_N
       COLOR_2 = COLOR_U if team2 == 'Ukraine' else COLOR_N
       pitch.lines(df_shot_event.x, df_shot_event.y,
@@ -60,8 +60,8 @@ def make_graph(ids, ff, title, padding=[None,None,None,None]):
                      va='top', ha='center', color='black', fontsize=10, ax=axs['pitch'])
     else:
       df_shot_event = events[events.id == ID].dropna(axis=1, how='all').copy()
-      team1 = df_shot_event.team_name.iloc[0]
-      team2 = list(set(events.team_name.unique()) - {team1})[0]
+      team1 = df_shot_event.team.iloc[0]
+      team2 = 'Netherlands' if team1 == 'Ukraine' else 'Ukraine'
       COLOR_1 = COLOR_U if team1 == 'Ukraine' else COLOR_N
       COLOR_2 = COLOR_U if team2 == 'Ukraine' else COLOR_N
       pitch.scatter(120-df_shot_event.x, 80-df_shot_event.y, c = COLOR_1,
