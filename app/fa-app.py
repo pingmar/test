@@ -107,6 +107,7 @@ with tab3:
     pass
 
 with tab4:
+    st.title('Corner events in our data')
     #1
     st.text('The player who get the ball out of bounds: Stefan de Vrij. Method: Clearance')
     IDS = ['bf6c9261-840b-4d8f-b7bd-9daa23b5b457']
@@ -145,6 +146,11 @@ with tab4:
     IDS = ['39755e7b-b68e-46f4-9fd9-07ac6b41ef2c']
     FF = ['corner']
     rp_plot_functions.make_graph(IDS, FF, 'Sixth corner pass')
+    # Mean corner
+    st.title('Mean num. of corner events in groups')
+    values = [12.0, 6.5, 8.666666666666666, 9.166666666666666, 9.666666666666666, 5.833333333333333, 8.375, 14.25, 9.0, 8.0]
+    v_names = ['A', 'B', 'C', 'D', 'E', 'F', 'Round of 16', 'Quarter-finals', 'Semi-finals', 'Final']
+    rp_plot_functions.make_chart_bart(values, v_names, 2)
 
 with tab5:
     pass
