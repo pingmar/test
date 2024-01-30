@@ -108,27 +108,27 @@ with tab3:
 
 with tab4:
     IDS = ['80110e08-410a-4928-9601-3d2f0694589f', 'bf6c9261-840b-4d8f-b7bd-9daa23b5b457']
-    FF = [True, False]
+    FF = ['freeze', 'corner']
     rp_plot_functions.make_graph(IDS, FF)
 
     IDS = ['49f48dc3-8bf0-41c8-af49-ab4ec4b164ee']
-    FF = [False]
+    FF = ['corner']
     rp_plot_functions.make_graph(IDS, FF)
 
     IDS = ['9f9d09f9-c091-4c58-b7f0-873df2649cbd', '022d0dc4-9779-4224-9533-ef690e560907']
-    FF = [True, False]
+    FF = ['freeze', 'corner']
     rp_plot_functions.make_graph(IDS, FF)
 
     IDS = ['7545d8df-3938-4662-b1e0-cf45bb49b338']
-    FF = [False]
+    FF = ['corner']
     rp_plot_functions.make_graph(IDS, FF)
 
     IDS = ['9b62f73f-60d0-4cf2-bef1-7aeee121f6af', 'ee9667f9-4f49-4c61-890a-91685aef779b']
-    FF = [False, False]
+    FF = ['solo', 'corner']
     rp_plot_functions.make_graph(IDS, FF)
 
     IDS = ['39755e7b-b68e-46f4-9fd9-07ac6b41ef2c']
-    FF = [False]
+    FF = ['corner']
     rp_plot_functions.make_graph(IDS, FF)
 
 with tab5:
