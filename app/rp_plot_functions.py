@@ -45,10 +45,9 @@ def make_graph(ids, ff, padding=[0,0,0,0]):
                     label='shot', color='#cb5a4c', ax=axs['pitch'])
   plt.show()
 
-if __name__ == "__main__":
-    competition_id=55
-    season_id=43
-    match_id=3788746
-    parser = Sblocal()
-    PATH = f'data/json/events/{match_id}.json'
-    events, related, freeze, tactics = parser.event(PATH)
+competition_id=55
+season_id=43
+match_id=3788746
+parser = Sblocal()
+PATH = f'data/json/events/{match_id}.json'
+events, related, freeze, tactics = parser.event(PATH)
