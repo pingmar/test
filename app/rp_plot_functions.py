@@ -25,11 +25,11 @@ def make_graph(ids, ff, padding=[0,0,0,0]):
       df_team2 = df_freeze_frame[df_freeze_frame.teammate == False]
       pitch.goal_angle(df_shot_event.x, df_shot_event.y, ax=axs['pitch'], alpha=0.2, zorder=1.1,
                   color='#cb5a4c', goal='right')
-      pitch.scatter(df_team1.x, df_team1.y, s=600, c=COLOR_1, label='Attacker', ax=axs['pitch'])
-      pitch.scatter(df_team2.x, df_team2.y, s=600, c=COLOR_2, label='Defender', ax=axs['pitch'])
-      pitch.scatter(df_shot_event.x, df_shot_event.y, c=COLOR_1, marker='football',
+      sc1 = pitch.scatter(df_team1.x, df_team1.y, s=600, c=COLOR_1, label='Attacker', ax=axs['pitch'])
+      sc2 = pitch.scatter(df_team2.x, df_team2.y, s=600, c=COLOR_2, label='Defender', ax=axs['pitch'])
+      sc3 = pitch.scatter(df_shot_event.x, df_shot_event.y, c=COLOR_1, marker='football',
                       s=600, ax=axs['pitch'], label='Shooter', zorder=1.2)
-      pitch.lines(df_shot_event.x, df_shot_event.y,
+      line = pitch.lines(df_shot_event.x, df_shot_event.y,
                     df_shot_event.end_x, df_shot_event.end_y, comet=True,
                     label='shot', color='#cb5a4c', ax=axs['pitch'])
     else:
@@ -38,12 +38,16 @@ def make_graph(ids, ff, padding=[0,0,0,0]):
       team2 = list(set(events.team_name.unique()) - {team1})[0]
       COLOR_1 = COLOR_U if team1 == 'Ukraine' else COLOR_N
       COLOR_2 = COLOR_U if team2 == 'Ukraine' else COLOR_N
-      pitch.scatter(df_shot_event.x, df_shot_event.y, c = COLOR_1, marker='football',
+      sc1 = pitch.scatter(df_shot_event.x, df_shot_event.y, c = COLOR_1, marker='football',
                       s=600, ax=axs['pitch'], label='Shooter', zorder=1.2)
-      pitch.scatter(df_shot_event.end_x, df_shot_event.end_y, s=600, c=COLOR_1, label='Reciver', ax=axs['pitch'])
-      pitch.lines(df_shot_event.x, df_shot_event.y,
+      sc2 = pitch.scatter(df_shot_event.end_x, df_shot_event.end_y, s=600, c=COLOR_1, label='Reciver', ax=axs['pitch'])
+      line = pitch.lines(df_shot_event.x, df_shot_event.y,
                     df_shot_event.end_x, df_shot_event.end_y, comet=True,
                     label='shot', color='#cb5a4c', ax=axs['pitch'])
+  axs['title'].text(0.5, 0.5, f'ABC',
+                    va='center', ha='center', color='black',
+                    #fontproperties=robotto_regular.prop, 
+                    fontsize=25)
   st.pyplot(fig)
 
 competition_id=55
