@@ -11,7 +11,7 @@ def make_graph(ids, ff, padding=[None,None,None,None]):
                         axis=False,
                         grid_height=0.83)
   for ID, tp in zip(ids, ff): 
-    if tp:
+    if tp == 'freeze':
       df_freeze_frame = freeze[freeze.id == ID].copy()
       df_shot_event = events[events.id == ID].dropna(axis=1, how='all').copy()
       df_freeze_frame = df_freeze_frame.merge(df_lineup, how='left', on='player_id')
@@ -34,7 +34,7 @@ def make_graph(ids, ff, padding=[None,None,None,None]):
         pitch.annotate(label, (df_freeze_frame.x[i], df_freeze_frame.y[i]),
                    va='center', ha='center', color='white', fontsize=15, ax=axs['pitch'])
         pitch.text(50+2*i, -20, f'{label}: {name}', va='center', ha='center', ax=axs['pitch'])
-    else:
+    elif tp == 'corner':
       df_shot_event = events[events.id == ID].dropna(axis=1, how='all').copy()
       team1 = df_shot_event.team_name.iloc[0]
       team2 = list(set(events.team_name.unique()) - {team1})[0]
@@ -46,6 +46,20 @@ def make_graph(ids, ff, padding=[None,None,None,None]):
       pitch.lines(df_shot_event.x, df_shot_event.y,
                     df_shot_event.end_x, df_shot_event.end_y, comet=True,
                     label='shot', color='#cb5a4c', ax=axs['pitch'])
+      pitch.annotate(df_shot_event.player_name, (df_shot_event.x, df_shot_event.y),
+                   va='center', ha='right', color='black', fontsize=15, ax=axs['pitch'])
+      pitch.annotate(df_shot_event.pass_recipient_name, (df_shot_event.end_x, df_shot_event.end_y),
+                   va='center', ha='right', color='black', fontsize=15, ax=axs['pitch'])
+    else:
+      df_shot_event = events[events.id == ID].dropna(axis=1, how='all').copy()
+      team1 = df_shot_event.team_name.iloc[0]
+      team2 = list(set(events.team_name.unique()) - {team1})[0]
+      COLOR_1 = COLOR_U if team1 == 'Ukraine' else COLOR_N
+      COLOR_2 = COLOR_U if team2 == 'Ukraine' else COLOR_N
+      pitch.scatter(df_shot_event.x, df_shot_event.y, c = COLOR_1, marker='football',
+                      s=600, ax=axs['pitch'], label='Defender', zorder=1.2)
+      pitch.annotate(df_shot_event.player_name, (df_shot_event.x, df_shot_event.y),
+                   va='center', ha='right', color='black', fontsize=15, ax=axs['pitch'])
   axs['title'].text(0.5, 0.5, f'ABC',
                     va='center', ha='center', color='black',
                     fontsize=25)
