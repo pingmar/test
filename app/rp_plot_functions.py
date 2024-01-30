@@ -1,8 +1,8 @@
-from statsbombpy import sb
 import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
 from mplsoccer import VerticalPitch, FontManager, Sblocal, Pitch
+import streamlit as st
 
 def make_graph(ids, ff, padding=[0,0,0,0]):
   COLOR_U = 'blue'
@@ -43,7 +43,7 @@ def make_graph(ids, ff, padding=[0,0,0,0]):
       pitch.lines(df_shot_event.x, df_shot_event.y,
                     df_shot_event.end_x, df_shot_event.end_y, comet=True,
                     label='shot', color='#cb5a4c', ax=axs['pitch'])
-  plt.show()
+  st.pyplot(fig)
 
 competition_id=55
 season_id=43
