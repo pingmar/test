@@ -16,7 +16,7 @@ def make_graph(ids, ff, title, padding=[None,None,None,None]):
   for ID, tp in zip(ids, ff): 
     if tp == 'freeze':
       df_shot_event = events[events.id == ID].dropna(axis=1, how='all').copy()
-      df_freeze_frame = pd.json_normalize(df_shot_event.shot_freeze_frame, sep='_') #freeze[freeze.id == ID].copy()
+      df_freeze_frame = pd.json_normalize(df_shot_event.shot_freeze_frame.dropna().iloc[0], sep='_') #freeze[freeze.id == ID].copy()
       df_freeze_frame[['x','y']] = pd.DataFrame(df_freeze_frame.location.tolist(), index=df_freeze_frame.index)
       df_freeze_frame = df_freeze_frame.merge(df_lineup, how='left', on='player_id')
       team1 = df_shot_event.team.iloc[0]
