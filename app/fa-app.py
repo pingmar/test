@@ -1,6 +1,7 @@
 import streamlit as st
 import pandas as pd
 from helper_passes import (get_passes_data, filter_passes_data, plot_pass_map, plot_pass_heatmap)
+import rp_plot_functions
 
 st.set_page_config(page_title='bayern-project', layout="wide")
 
@@ -106,7 +107,9 @@ with tab3:
     pass
 
 with tab4:
-    pass
+    IDS = ['80110e08-410a-4928-9601-3d2f0694589f', 'bf6c9261-840b-4d8f-b7bd-9daa23b5b457']
+    FF = [True, False]
+    rp_plot_functions.make_graph(IDS, FF)
 
 with tab5:
     pass
