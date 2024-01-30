@@ -52,8 +52,8 @@ def make_graph(ids, ff, title, padding=[None,None,None,None]):
       pitch.scatter(df_shot_event.pass_end_location.item()[0], df_shot_event.pass_end_location.item()[0], s=600, c=COLOR_1, label='Reciver', ax=axs['pitch'])
       pitch.annotate(df_shot_event.player.item(), (df_shot_event.location.item()[0] - C, df_shot_event.location.item()[-1]),
                    va='top', ha='center', color='black', fontsize=10, ax=axs['pitch'])
-      if 'pass_recipient_name' in df_shot_event.columns:
-        pitch.annotate(df_shot_event.pass_recipient_name.item(), (df_shot_event.pass_end_location.item()[0] - C, df_shot_event.pass_end_location.item()[-1]),
+      if 'pass_recipient' in df_shot_event.columns:
+        pitch.annotate(df_shot_event.pass_recipient.item(), (df_shot_event.pass_end_location.item()[0] - C, df_shot_event.pass_end_location.item()[-1]),
                      va='top', ha='center', color='black', fontsize=10, ax=axs['pitch'])
       else:
         pitch.annotate('Unknown', (df_shot_event.pass_end_location.item()[0] - C, df_shot_event.pass_end_location.item()[-1]),
