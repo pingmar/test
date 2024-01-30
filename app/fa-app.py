@@ -108,8 +108,11 @@ with tab3:
 
 with tab4:
     #1
-    IDS = ['80110e08-410a-4928-9601-3d2f0694589f', 'bf6c9261-840b-4d8f-b7bd-9daa23b5b457']
-    FF = ['freeze', 'corner']
+    IDS = ['80110e08-410a-4928-9601-3d2f0694589f', 
+    FF = ['freeze']
+    rp_plot_functions.make_graph(IDS, FF)
+    IDS = ['bf6c9261-840b-4d8f-b7bd-9daa23b5b457']
+    FF = ['corner']
     rp_plot_functions.make_graph(IDS, FF)
     #2
     IDS = ['49f48dc3-8bf0-41c8-af49-ab4ec4b164ee']
@@ -117,15 +120,24 @@ with tab4:
     rp_plot_functions.make_graph(IDS, FF)
     #3
     IDS = ['9f9d09f9-c091-4c58-b7f0-873df2649cbd', '022d0dc4-9779-4224-9533-ef690e560907']
-    FF = ['freeze', 'corner']
+    FF = ['freeze']
+    rp_plot_functions.make_graph(IDS, FF)
+    IDS = ['022d0dc4-9779-4224-9533-ef690e560907']
+    FF = ['corner']
     rp_plot_functions.make_graph(IDS, FF)
     #4
-    IDS = ['cfafc900-4c4d-49d5-b11c-8a3e0390eeca', '7545d8df-3938-4662-b1e0-cf45bb49b338']
-    FF = ['solo', 'corner']
+    IDS = ['cfafc900-4c4d-49d5-b11c-8a3e0390eeca']
+    FF = ['solo']
+    rp_plot_functions.make_graph(IDS, FF)
+    IDS = ['7545d8df-3938-4662-b1e0-cf45bb49b338']
+    FF = ['corner']
     rp_plot_functions.make_graph(IDS, FF)
     #5
-    IDS = ['9b62f73f-60d0-4cf2-bef1-7aeee121f6af', 'ee9667f9-4f49-4c61-890a-91685aef779b']
-    FF = ['solo', 'corner']
+    IDS = ['9b62f73f-60d0-4cf2-bef1-7aeee121f6af']
+    FF = ['solo']
+    rp_plot_functions.make_graph(IDS, FF)
+    IDS = ['ee9667f9-4f49-4c61-890a-91685aef779b']
+    FF = ['corner']
     rp_plot_functions.make_graph(IDS, FF)
     #6
     IDS = ['39755e7b-b68e-46f4-9fd9-07ac6b41ef2c']
