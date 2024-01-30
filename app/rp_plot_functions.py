@@ -20,7 +20,7 @@ def make_graph(ids, ff, padding=[0,0,0,0]):
       team1 = df_shot_event.team_name.iloc[0]
       team2 = list(set(events.team_name.unique()) - {team1})[0]
       COLOR_1 = COLOR_U if team1 == 'Ukraine' else COLOR_N
-      COLOR_2 = COLOR_U if team1 == 'Ukraine' else COLOR_N
+      COLOR_2 = COLOR_U if team2 == 'Ukraine' else COLOR_N
       df_team1 = df_freeze_frame[df_freeze_frame.teammate == True]
       df_team2 = df_freeze_frame[df_freeze_frame.teammate == False]
       pitch.goal_angle(df_shot_event.x, df_shot_event.y, ax=axs['pitch'], alpha=0.2, zorder=1.1,
@@ -37,7 +37,7 @@ def make_graph(ids, ff, padding=[0,0,0,0]):
       team1 = df_shot_event.team_name.iloc[0]
       team2 = list(set(events.team_name.unique()) - {team1})[0]
       COLOR_1 = COLOR_U if team1 == 'Ukraine' else COLOR_N
-      COLOR_2 = COLOR_U if team1 == 'Ukraine' else COLOR_N
+      COLOR_2 = COLOR_U if team2 == 'Ukraine' else COLOR_N
       pitch.scatter(df_shot_event.x, df_shot_event.y, c = COLOR_1, marker='football',
                       s=600, ax=axs['pitch'], label='Shooter', zorder=1.2)
       pitch.scatter(df_shot_event.end_x, df_shot_event.end_y, s=600, c=COLOR_1, label='Reciver', ax=axs['pitch'])
