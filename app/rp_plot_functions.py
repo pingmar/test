@@ -3,6 +3,7 @@ import pandas as pd
 import matplotlib.pyplot as plt
 from mplsoccer import VerticalPitch, FontManager, Sblocal, Pitch
 import streamlit as st
+import matplotlib.patches as mpatches
 
 def make_graph(ids, ff, title, padding=[None,None,None,None]):
   pitch = VerticalPitch(goal_type='box', half=True, pad_left = padding[0], pad_right = padding[1], pad_top = padding[2], pad_bottom = padding[3])
@@ -72,6 +73,24 @@ def make_graph(ids, ff, title, padding=[None,None,None,None]):
   for text in legend.get_texts():
     text.set_fontsize(20)
     text.set_va('center')
+  st.pyplot(fig)
+
+def make_chart_bart(data, data_names, spec=0):
+  fig, ax = plt.subplots()
+  #fig.set_size_inches(18.5, 15.5)
+  color = ['C0' for i in range(len(data))]
+  red_patch = mpatches.Patch(color='red', label='Our Group')
+  blue_patch = mpatches.Patch(color='C0', label='Others')
+  y_pos = np.arange(len(data_names))
+  if spec != 0:
+    color[spec] = 'red'
+  ax.barh(y_pos, data, align='center', height=0.8, color=color)
+  ax.set_yticks(y_pos, labels=data_names)
+  ax.invert_yaxis() 
+  ax.set_xlabel('Num. of corner events')
+  ax.set_title('Mean corner events for')
+  plt.xticks(np.arange(0, max(data)+1, 1.0))
+  plt.legend(loc="lower right", handles=[red_patch, blue_patch])
   st.pyplot(fig)
 
 COLOR_U = 'blue'
