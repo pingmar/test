@@ -68,7 +68,7 @@ def make_graph(ids, ff, padding=[None,None,None,None]):
                     va='center', ha='center', color='black',
                     fontsize=25)
   #legend = axs['pitch'].legend(df_freeze_frame.player_name.to_list(), df_freeze_frame.jersey_number.to_list())
-  legend = axs['pitch'].legend(loc='left', labelspacing=1.5)
+  legend = axs['pitch'].legend(loc='upper left', labelspacing=1.5)
   for text in legend.get_texts():
     text.set_fontsize(20)
     text.set_va('center')
