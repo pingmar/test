@@ -4,7 +4,7 @@ import matplotlib.pyplot as plt
 from mplsoccer import VerticalPitch, FontManager, Sblocal, Pitch
 import streamlit as st
 
-def make_graph(ids, ff, padding=[None,None,None,None]):
+def make_graph(ids, ff, title, padding=[None,None,None,None]):
   pitch = VerticalPitch(goal_type='box', half=True, pad_left = padding[0], pad_right = padding[1], pad_top = padding[2], pad_bottom = padding[3])
   fig, axs = pitch.grid(figheight=8, endnote_height=0,
                         title_height=0.1, title_space=0.02,
@@ -23,13 +23,13 @@ def make_graph(ids, ff, padding=[None,None,None,None]):
       df_team2 = df_freeze_frame[df_freeze_frame.teammate == False]
       pitch.goal_angle(df_shot_event.x, df_shot_event.y, ax=axs['pitch'], alpha=0.2, zorder=1.1,
                   color='#cb5a4c', goal='right')
+      pitch.lines(df_shot_event.x, df_shot_event.y,
+                    df_shot_event.end_x, df_shot_event.end_y, comet=True,
+                    label='shot', color='#cb5a4c', ax=axs['pitch'])
       pitch.scatter(df_team1.x, df_team1.y, s=600, c=COLOR_1, label='Attacker', ax=axs['pitch'])
       pitch.scatter(df_team2.x, df_team2.y, s=600, c=COLOR_2, label='Defender', ax=axs['pitch'])
       pitch.scatter(df_shot_event.x, df_shot_event.y, c=COLOR_1, marker='football',
                       s=600, ax=axs['pitch'], label=f'Shooter: {df_shot_event.player_name.item()}', zorder=1.2)
-      pitch.lines(df_shot_event.x, df_shot_event.y,
-                    df_shot_event.end_x, df_shot_event.end_y, comet=True,
-                    label='shot', color='#cb5a4c', ax=axs['pitch'])
       for i, (label, name) in enumerate(zip(df_freeze_frame.jersey_number, df_freeze_frame.player_name)):
         pitch.annotate(label, (df_freeze_frame.x[i], df_freeze_frame.y[i]),
                    va='center', ha='center', color='white', fontsize=15, ax=axs['pitch'])
@@ -40,12 +40,12 @@ def make_graph(ids, ff, padding=[None,None,None,None]):
       team2 = list(set(events.team_name.unique()) - {team1})[0]
       COLOR_1 = COLOR_U if team1 == 'Ukraine' else COLOR_N
       COLOR_2 = COLOR_U if team2 == 'Ukraine' else COLOR_N
-      pitch.scatter(df_shot_event.x, df_shot_event.y, c = COLOR_1, marker='football',
-                      s=600, ax=axs['pitch'], label='Shooter', zorder=1.2)
-      pitch.scatter(df_shot_event.end_x, df_shot_event.end_y, s=600, c=COLOR_1, label='Reciver', ax=axs['pitch'])
       pitch.lines(df_shot_event.x, df_shot_event.y,
                     df_shot_event.end_x, df_shot_event.end_y, comet=True,
                     label='shot', color='#cb5a4c', ax=axs['pitch'])
+      pitch.scatter(df_shot_event.x, df_shot_event.y, c = COLOR_1, marker='football',
+                      s=600, ax=axs['pitch'], label='Shooter', zorder=1.2)
+      pitch.scatter(df_shot_event.end_x, df_shot_event.end_y, s=600, c=COLOR_1, label='Reciver', ax=axs['pitch'])
       pitch.annotate(df_shot_event.player_name.item(), (df_shot_event.x - C, df_shot_event.y),
                    va='top', ha='center', color='black', fontsize=10, ax=axs['pitch'])
       if 'pass_recipient_name' in df_shot_event.columns:
@@ -64,7 +64,7 @@ def make_graph(ids, ff, padding=[None,None,None,None]):
                       s=600, ax=axs['pitch'], label='Defender', zorder=1.2)
       pitch.annotate(df_shot_event.player_name.item(), (120-df_shot_event.x + C, 80-df_shot_event.y),
                    va='center', ha='center', color='black', fontsize=10, ax=axs['pitch'])
-  axs['title'].text(0.5, 0.5, f'ABC',
+  axs['title'].text(0.5, 0.5, f'{title}',
                     va='center', ha='center', color='black',
                     fontsize=25)
   #legend = axs['pitch'].legend(df_freeze_frame.player_name.to_list(), df_freeze_frame.jersey_number.to_list())
