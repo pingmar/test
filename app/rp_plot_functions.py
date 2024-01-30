@@ -50,7 +50,6 @@ def make_graph(ids, ff, padding=[0,0,0,0]):
                     label='shot', color='#cb5a4c', ax=axs['pitch'])
   axs['title'].text(0.5, 0.5, f'ABC',
                     va='center', ha='center', color='black',
-                    #fontproperties=robotto_regular.prop, 
                     fontsize=25)
   st.pyplot(fig)
 
