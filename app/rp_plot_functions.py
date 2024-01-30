@@ -4,7 +4,7 @@ import matplotlib.pyplot as plt
 from mplsoccer import VerticalPitch, FontManager, Sblocal, Pitch
 import streamlit as st
 
-def make_graph(ids, ff, padding=[0,0,0,0]):
+def make_graph(ids, ff, padding=[None,None,None,None]):
   COLOR_U = 'blue'
   COLOR_N = 'orange'
   SIZE = 1
