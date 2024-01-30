@@ -47,9 +47,13 @@ def make_graph(ids, ff, padding=[None,None,None,None]):
                     df_shot_event.end_x, df_shot_event.end_y, comet=True,
                     label='shot', color='#cb5a4c', ax=axs['pitch'])
       pitch.annotate(df_shot_event.player_name, (df_shot_event.x, df_shot_event.y),
-                   va='center', ha='right', color='black', fontsize=15, ax=axs['pitch'])
-      pitch.annotate(df_shot_event.pass_recipient_name, (df_shot_event.end_x, df_shot_event.end_y),
-                   va='center', ha='right', color='black', fontsize=15, ax=axs['pitch'])
+                   va='top', ha='center', color='black', fontsize=10, ax=axs['pitch'])
+      if 'pass_recipient_name' in df_shot_event.columns:
+        pitch.annotate(df_shot_event.pass_recipient_name, (df_shot_event.end_x, df_shot_event.end_y),
+                     va='top', ha='center', color='black', fontsize=10, ax=axs['pitch'])
+      else:
+        pitch.annotate('Unknown', (df_shot_event.end_x, df_shot_event.end_y),
+                     va='top', ha='center', color='black', fontsize=10, ax=axs['pitch'])
     else:
       df_shot_event = events[events.id == ID].dropna(axis=1, how='all').copy()
       team1 = df_shot_event.team_name.iloc[0]
@@ -59,7 +63,7 @@ def make_graph(ids, ff, padding=[None,None,None,None]):
       pitch.scatter(120-df_shot_event.x, df_shot_event.y, c = COLOR_1, marker='football',
                       s=600, ax=axs['pitch'], label='Defender', zorder=1.2)
       pitch.annotate(df_shot_event.player_name, (120-df_shot_event.x, df_shot_event.y),
-                   va='center', ha='right', color='black', fontsize=15, ax=axs['pitch'])
+                   va='top', ha='center', color='black', fontsize=10, ax=axs['pitch'])
   axs['title'].text(0.5, 0.5, f'ABC',
                     va='center', ha='center', color='black',
                     fontsize=25)
