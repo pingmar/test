@@ -56,9 +56,9 @@ def make_graph(ids, ff, padding=[None,None,None,None]):
       team2 = list(set(events.team_name.unique()) - {team1})[0]
       COLOR_1 = COLOR_U if team1 == 'Ukraine' else COLOR_N
       COLOR_2 = COLOR_U if team2 == 'Ukraine' else COLOR_N
-      pitch.scatter(df_shot_event.x, df_shot_event.y, c = COLOR_1, marker='football',
+      pitch.scatter(120-df_shot_event.x, df_shot_event.y, c = COLOR_1, marker='football',
                       s=600, ax=axs['pitch'], label='Defender', zorder=1.2)
-      pitch.annotate(df_shot_event.player_name, (df_shot_event.x, df_shot_event.y),
+      pitch.annotate(df_shot_event.player_name, (120-df_shot_event.x, df_shot_event.y),
                    va='center', ha='right', color='black', fontsize=15, ax=axs['pitch'])
   axs['title'].text(0.5, 0.5, f'ABC',
                     va='center', ha='center', color='black',
