@@ -49,5 +49,5 @@ competition_id=55
 season_id=43
 match_id=3788746
 parser = Sblocal()
-PATH = f'data/json/events/{match_id}.json'
+PATH = f'./data/json/events/{match_id}.json'
 events, related, freeze, tactics = parser.event(PATH)
