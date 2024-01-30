@@ -33,6 +33,7 @@ def make_graph(ids, ff, padding=[None,None,None,None]):
       for i, (label, name) in enumerate(zip(df_freeze_frame.jersey_number, df_freeze_frame.player_name)):
         pitch.annotate(label, (df_freeze_frame.x[i], df_freeze_frame.y[i]),
                    va='center', ha='center', color='white', fontsize=15, ax=axs['pitch'])
+        pitch.text(60, 40 + 10*i, f'{label}: {name}')
     else:
       df_shot_event = events[events.id == ID].dropna(axis=1, how='all').copy()
       team1 = df_shot_event.team_name.iloc[0]
@@ -48,7 +49,8 @@ def make_graph(ids, ff, padding=[None,None,None,None]):
   axs['title'].text(0.5, 0.5, f'ABC',
                     va='center', ha='center', color='black',
                     fontsize=25)
-  legend = axs['pitch'].legend(df_freeze_frame.player_name.to_list(), df_freeze_frame.jersey_number.to_list())
+  #legend = axs['pitch'].legend(df_freeze_frame.player_name.to_list(), df_freeze_frame.jersey_number.to_list())
+  legend = axs['pitch'].legend(loc='center left', labelspacing=1.5)
   for text in legend.get_texts():
     text.set_fontsize(20)
     text.set_va('center')
