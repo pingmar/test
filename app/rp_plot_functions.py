@@ -107,4 +107,4 @@ PATH_EVENT = f'app/data/events.pkl'
 PATH_LINEUP = f'app/data/lineups.pkl'
 events = pd.read_pickle(PATH_EVENT)
 lineup = pd.read_pickle(PATH_LINEUP)
-df_lineup = lineup[['player_id', 'jersey_number', 'team_name']].copy()
+df_lineup = lineup[['player_id', 'jersey_number', 'country']].copy()
