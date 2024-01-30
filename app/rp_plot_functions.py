@@ -106,5 +106,7 @@ match_id=3788746
 PATH_EVENT = f'app/data/events.pkl'
 PATH_LINEUP = f'app/data/lineups.pkl'
 events = pd.read_pickle(PATH_EVENT)
+events[['x','y']] = pd.DataFrame(events.location.tolist(), index=events.index)
+events[['end_x','end_y']] = pd.DataFrame(events.pass_end_location.tolist(), index=events.index)
 lineup = pd.read_pickle(PATH_LINEUP)
 df_lineup = lineup[['player_id', 'jersey_number', 'country']].copy()
