@@ -26,7 +26,7 @@ def make_graph(ids, ff, padding=[None,None,None,None]):
       pitch.scatter(df_team1.x, df_team1.y, s=600, c=COLOR_1, label='Attacker', ax=axs['pitch'])
       pitch.scatter(df_team2.x, df_team2.y, s=600, c=COLOR_2, label='Defender', ax=axs['pitch'])
       pitch.scatter(df_shot_event.x, df_shot_event.y, c=COLOR_1, marker='football',
-                      s=600, ax=axs['pitch'], label='Shooter', zorder=1.2)
+                      s=600, ax=axs['pitch'], label=f'Shooter: {df_shot_event.player_name.item()}', zorder=1.2)
       pitch.lines(df_shot_event.x, df_shot_event.y,
                     df_shot_event.end_x, df_shot_event.end_y, comet=True,
                     label='shot', color='#cb5a4c', ax=axs['pitch'])
@@ -46,13 +46,13 @@ def make_graph(ids, ff, padding=[None,None,None,None]):
       pitch.lines(df_shot_event.x, df_shot_event.y,
                     df_shot_event.end_x, df_shot_event.end_y, comet=True,
                     label='shot', color='#cb5a4c', ax=axs['pitch'])
-      pitch.annotate(df_shot_event.player_name.item(), (df_shot_event.x + C, df_shot_event.y),
+      pitch.annotate(df_shot_event.player_name.item(), (df_shot_event.x - C, df_shot_event.y),
                    va='top', ha='center', color='black', fontsize=10, ax=axs['pitch'])
       if 'pass_recipient_name' in df_shot_event.columns:
-        pitch.annotate(df_shot_event.pass_recipient_name.item(), (df_shot_event.end_x, df_shot_event.end_y),
+        pitch.annotate(df_shot_event.pass_recipient_name.item(), (df_shot_event.end_x - C, df_shot_event.end_y),
                      va='top', ha='center', color='black', fontsize=10, ax=axs['pitch'])
       else:
-        pitch.annotate('Unknown', (df_shot_event.end_x, df_shot_event.end_y),
+        pitch.annotate('Unknown', (df_shot_event.end_x - C, df_shot_event.end_y),
                      va='top', ha='center', color='black', fontsize=10, ax=axs['pitch'])
     else:
       df_shot_event = events[events.id == ID].dropna(axis=1, how='all').copy()
@@ -77,7 +77,7 @@ def make_graph(ids, ff, padding=[None,None,None,None]):
 COLOR_U = 'blue'
 COLOR_N = 'orange'
 SIZE = 1
-C = 20
+C = 30
 competition_id=55
 season_id=43
 match_id=3788746
