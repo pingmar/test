@@ -19,8 +19,8 @@ def make_graph(ids, ff, title, padding=[None,None,None,None]):
       df_freeze_frame = pd.json_normalize(df_shot_event.shot_freeze_frame, sep='_') #freeze[freeze.id == ID].copy()
       df_freeze_frame[['x','y']] = pd.DataFrame(df_freeze_frame.location.tolist(), index=df_freeze_frame.index)
       df_freeze_frame = df_freeze_frame.merge(df_lineup, how='left', on='player_id')
-      team1 = df_shot_event.team_name.iloc[0]
-      team2 = list(set(events.team_name.unique()) - {team1})[0]
+      team1 = df_shot_event.team.iloc[0]
+      team2 = 'Netherlands' if team1 == 'Ukraine' else 'Ukraine'
       COLOR_1 = COLOR_U if team1 == 'Ukraine' else COLOR_N
       COLOR_2 = COLOR_U if team2 == 'Ukraine' else COLOR_N
       df_team1 = df_freeze_frame[df_freeze_frame.teammate == True]
