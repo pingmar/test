@@ -5,9 +5,6 @@ from mplsoccer import VerticalPitch, FontManager, Sblocal, Pitch
 import streamlit as st
 
 def make_graph(ids, ff, padding=[None,None,None,None]):
-  COLOR_U = 'blue'
-  COLOR_N = 'orange'
-  SIZE = 1
   pitch = VerticalPitch(goal_type='box', half=True, pad_left = padding[0], pad_right = padding[1], pad_top = padding[2], pad_bottom = padding[3])
   fig, axs = pitch.grid(figheight=8, endnote_height=0,
                         title_height=0.1, title_space=0.02,
@@ -36,8 +33,6 @@ def make_graph(ids, ff, padding=[None,None,None,None]):
       for i, (label, name) in enumerate(zip(df_freeze_frame.jersey_number, df_freeze_frame.player_name)):
         pitch.annotate(label, (df_freeze_frame.x[i], df_freeze_frame.y[i]),
                    va='center', ha='center', color='white', fontsize=15, ax=axs['pitch'])
-        pitch.annotate(name, (df_freeze_frame.x[i], df_freeze_frame.y[i]),
-                   va='bottom', ha='center', color='black', fontsize=15, ax=axs['pitch'])
     else:
       df_shot_event = events[events.id == ID].dropna(axis=1, how='all').copy()
       team1 = df_shot_event.team_name.iloc[0]
@@ -53,6 +48,7 @@ def make_graph(ids, ff, padding=[None,None,None,None]):
   axs['title'].text(0.5, 0.5, f'ABC',
                     va='center', ha='center', color='black',
                     fontsize=25)
+  legend = axs['pitch'].legend(df_freeze_frame.jersey_number, df_freeze_frame.player_name)
   st.pyplot(fig)
 
 COLOR_U = 'blue'
