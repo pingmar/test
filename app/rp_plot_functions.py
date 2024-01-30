@@ -65,5 +65,5 @@ parser = Sblocal()
 PATH_EVENT = f'app/data/json/events/3788746.json'
 PATH_LINEUP = f'app/data/json/lineups/3788746.json'
 events, related, freeze, tactics = parser.event(PATH_EVENT)
-lineup = parser.(PATH_LINEUP)
+lineup = parser.lineup(PATH_LINEUP)
 df_lineup = lineup[['player_id', 'jersey_number', 'team_name']].copy()
