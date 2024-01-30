@@ -1,7 +1,9 @@
+import warnings
+warnings.simplefilter(action='ignore', category=FutureWarning)
 import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
-from mplsoccer import VerticalPitch, FontManager, Sblocal, Pitch
+from mplsoccer import VerticalPitch, FontManager, Pitch
 import streamlit as st
 import matplotlib.patches as mpatches
 
@@ -13,8 +15,9 @@ def make_graph(ids, ff, title, padding=[None,None,None,None]):
                         grid_height=0.83)
   for ID, tp in zip(ids, ff): 
     if tp == 'freeze':
-      df_freeze_frame = freeze[freeze.id == ID].copy()
       df_shot_event = events[events.id == ID].dropna(axis=1, how='all').copy()
+      df_freeze_frame = pd.json_normalize(df_shot_event.shot_freeze_frame, sep='_') #freeze[freeze.id == ID].copy()
+      df_freeze_frame[['x','y']] = pd.DataFrame(df_freeze_frame.location.tolist(), index=df_freeze_frame.index)
       df_freeze_frame = df_freeze_frame.merge(df_lineup, how='left', on='player_id')
       team1 = df_shot_event.team_name.iloc[0]
       team2 = list(set(events.team_name.unique()) - {team1})[0]
@@ -100,9 +103,8 @@ C = 2
 competition_id=55
 season_id=43
 match_id=3788746
-parser = Sblocal()
-PATH_EVENT = f'app/data/json/events/3788746.json'
-PATH_LINEUP = f'app/data/json/lineups/3788746.json'
-events, related, freeze, tactics = parser.event(PATH_EVENT)
-lineup = parser.lineup(PATH_LINEUP)
+PATH_EVENT = f'app/data/events.pkl'
+PATH_LINEUP = f'app/data/lineups.pkl'
+events = pd.read_pickle(PATH_EVENT)
+lineup = pd.read_pickle(PATH_LINEUP)
 df_lineup = lineup[['player_id', 'jersey_number', 'team_name']].copy()
