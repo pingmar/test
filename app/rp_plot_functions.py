@@ -46,10 +46,10 @@ def make_graph(ids, ff, padding=[None,None,None,None]):
       pitch.lines(df_shot_event.x, df_shot_event.y,
                     df_shot_event.end_x, df_shot_event.end_y, comet=True,
                     label='shot', color='#cb5a4c', ax=axs['pitch'])
-      pitch.annotate(df_shot_event.player_name, (df_shot_event.x, df_shot_event.y),
+      pitch.annotate(df_shot_event.player_name.item(), (df_shot_event.x, df_shot_event.y),
                    va='top', ha='center', color='black', fontsize=10, ax=axs['pitch'])
       if 'pass_recipient_name' in df_shot_event.columns:
-        pitch.annotate(df_shot_event.pass_recipient_name, (df_shot_event.end_x, df_shot_event.end_y),
+        pitch.annotate(df_shot_event.pass_recipient_name.item(), (df_shot_event.end_x, df_shot_event.end_y),
                      va='top', ha='center', color='black', fontsize=10, ax=axs['pitch'])
       else:
         pitch.annotate('Unknown', (df_shot_event.end_x, df_shot_event.end_y),
@@ -62,7 +62,7 @@ def make_graph(ids, ff, padding=[None,None,None,None]):
       COLOR_2 = COLOR_U if team2 == 'Ukraine' else COLOR_N
       pitch.scatter(120-df_shot_event.x, df_shot_event.y, c = COLOR_1,
                       s=600, ax=axs['pitch'], label='Defender', zorder=1.2)
-      pitch.annotate(df_shot_event.player_name, (120-df_shot_event.x, df_shot_event.y),
+      pitch.annotate(df_shot_event.player_name.item(), (120-df_shot_event.x, df_shot_event.y),
                    va='top', ha='center', color='black', fontsize=10, ax=axs['pitch'])
   axs['title'].text(0.5, 0.5, f'ABC',
                     va='center', ha='center', color='black',
