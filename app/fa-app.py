@@ -108,7 +108,7 @@ with tab3:
 
 with tab4:
     #1
-    IDS = ['80110e08-410a-4928-9601-3d2f0694589f', 
+    IDS = ['80110e08-410a-4928-9601-3d2f0694589f'] 
     FF = ['freeze']
     rp_plot_functions.make_graph(IDS, FF)
     IDS = ['bf6c9261-840b-4d8f-b7bd-9daa23b5b457']
