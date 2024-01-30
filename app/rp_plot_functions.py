@@ -25,14 +25,14 @@ def make_graph(ids, ff, title, padding=[None,None,None,None]):
       COLOR_2 = COLOR_U if team2 == 'Ukraine' else COLOR_N
       df_team1 = df_freeze_frame[df_freeze_frame.teammate == True]
       df_team2 = df_freeze_frame[df_freeze_frame.teammate == False]
-      pitch.goal_angle(df_shot_event.location[0], df_shot_event.location[-1], ax=axs['pitch'], alpha=0.2, zorder=1.1,
+      pitch.goal_angle(df_shot_event.location.item()[0], df_shot_event.location.item()[-1], ax=axs['pitch'], alpha=0.2, zorder=1.1,
                   color='#cb5a4c', goal='right')
-      pitch.lines(df_shot_event.location[0], df_shot_event.location[-1],
-                    df_shot_event.shot_end_location[0], df_shot_event.shot_end_location[-1], comet=True,
+      pitch.lines(df_shot_event.location.item()[0], df_shot_event.location.item()[-1],
+                    df_shot_event.shot_end_location.item()[0], df_shot_event.shot_end_location.item()[-1], comet=True,
                     label='shot', color='#cb5a4c', ax=axs['pitch'])
       pitch.scatter(df_team1.x, df_team1.y, s=600, c=COLOR_1, label='Attacker', ax=axs['pitch'])
       pitch.scatter(df_team2.x, df_team2.y, s=600, c=COLOR_2, label='Defender', ax=axs['pitch'])
-      pitch.scatter(df_shot_event.location[0], df_shot_event.location[-1], c=COLOR_1, marker='football',
+      pitch.scatter(df_shot_event.location.item()[0], df_shot_event.location.item()[-1], c=COLOR_1, marker='football',
                       s=600, ax=axs['pitch'], label=f'Shooter: {df_shot_event.player_name.item()}', zorder=1.2)
       for i, (label, name) in enumerate(zip(df_freeze_frame.jersey_number, df_freeze_frame.player_name)):
         pitch.annotate(label, (df_freeze_frame.x[i], df_freeze_frame.y[i]),
@@ -44,19 +44,19 @@ def make_graph(ids, ff, title, padding=[None,None,None,None]):
       team2 = 'Netherlands' if team1 == 'Ukraine' else 'Ukraine'
       COLOR_1 = COLOR_U if team1 == 'Ukraine' else COLOR_N
       COLOR_2 = COLOR_U if team2 == 'Ukraine' else COLOR_N
-      pitch.lines(df_shot_event.location[0], df_shot_event.location[-1],
-                    df_shot_event.pass_end_location[0], df_shot_event.pass_end_location[-1], comet=True,
+      pitch.lines(df_shot_event.location.item()[0], df_shot_event.location.item()[-1],
+                    df_shot_event.pass_end_location.item()[0], df_shot_event.pass_end_location.item()[-1], comet=True,
                     label='shot', color='#cb5a4c', ax=axs['pitch'])
-      pitch.scatter(df_shot_event.location[0], df_shot_event.location[-1], c = COLOR_1, marker='football',
+      pitch.scatter(df_shot_event.location.item()[0], df_shot_event.location.item()[-1], c = COLOR_1, marker='football',
                       s=600, ax=axs['pitch'], label='Shooter', zorder=1.2)
-      pitch.scatter(df_shot_event.pass_end_location[0], df_shot_event.pass_end_location[0], s=600, c=COLOR_1, label='Reciver', ax=axs['pitch'])
-      pitch.annotate(df_shot_event.player_name.item(), (df_shot_event.location[0] - C, df_shot_event.location[-1]),
+      pitch.scatter(df_shot_event.pass_end_location.item()[0], df_shot_event.pass_end_location.item()[0], s=600, c=COLOR_1, label='Reciver', ax=axs['pitch'])
+      pitch.annotate(df_shot_event.player_name.item(), (df_shot_event.location.item()[0] - C, df_shot_event.location.item()[-1]),
                    va='top', ha='center', color='black', fontsize=10, ax=axs['pitch'])
       if 'pass_recipient_name' in df_shot_event.columns:
-        pitch.annotate(df_shot_event.pass_recipient_name.item(), (df_shot_event.pass_end_location[0] - C, df_shot_event.pass_end_location[-1]),
+        pitch.annotate(df_shot_event.pass_recipient_name.item(), (df_shot_event.pass_end_location.item()[0] - C, df_shot_event.pass_end_location.item()[-1]),
                      va='top', ha='center', color='black', fontsize=10, ax=axs['pitch'])
       else:
-        pitch.annotate('Unknown', (df_shot_event.pass_end_location[0] - C, df_shot_event.pass_end_location[-1]),
+        pitch.annotate('Unknown', (df_shot_event.pass_end_location.item()[0] - C, df_shot_event.pass_end_location.item()[-1]),
                      va='top', ha='center', color='black', fontsize=10, ax=axs['pitch'])
     else:
       df_shot_event = events[events.id == ID].dropna(axis=1, how='all').copy()
@@ -64,9 +64,9 @@ def make_graph(ids, ff, title, padding=[None,None,None,None]):
       team2 = 'Netherlands' if team1 == 'Ukraine' else 'Ukraine'
       COLOR_1 = COLOR_U if team1 == 'Ukraine' else COLOR_N
       COLOR_2 = COLOR_U if team2 == 'Ukraine' else COLOR_N
-      pitch.scatter(120-df_shot_event.location[0], 80-df_shot_event.location[-1], c = COLOR_1,
+      pitch.scatter(120-df_shot_event.location.item()[0], 80-df_shot_event.location.item()[-1], c = COLOR_1,
                       s=600, ax=axs['pitch'], label='Defender', zorder=1.2)
-      pitch.annotate(df_shot_event.player_name.item(), (120-df_shot_event.location[0] + C, 80-df_shot_event.location[-1]),
+      pitch.annotate(df_shot_event.player_name.item(), (120-df_shot_event.location.item()[0] + C, 80-df_shot_event.location.item()[-1]),
                    va='center', ha='center', color='black', fontsize=10, ax=axs['pitch'])
   axs['title'].text(0.5, 0.5, f'{title}',
                     va='center', ha='center', color='black',
