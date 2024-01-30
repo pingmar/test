@@ -109,7 +109,7 @@ with tab3:
 with tab4:
     IDS = ['80110e08-410a-4928-9601-3d2f0694589f', 'bf6c9261-840b-4d8f-b7bd-9daa23b5b457']
     FF = [True, False]
-    rp_plot_functions.make_graph(IDS, FF, [-20,0,0,-50])
+    rp_plot_functions.make_graph(IDS, FF, [-20,None,None,-50])
 
 with tab5:
     pass
