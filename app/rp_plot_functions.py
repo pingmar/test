@@ -28,7 +28,7 @@ def make_graph(ids, ff, title, padding=[None,None,None,None]):
       pitch.goal_angle(df_shot_event.location.item()[0], df_shot_event.location.item()[-1], ax=axs['pitch'], alpha=0.2, zorder=1.1,
                   color='#cb5a4c', goal='right')
       pitch.lines(df_shot_event.location.item()[0], df_shot_event.location.item()[-1],
-                    df_shot_event.shot_end_location.item()[0], df_shot_event.shot_end_location.item()[-1], comet=True,
+                    df_shot_event.shot_end_location.item()[0], df_shot_event.shot_end_location.item()[1], comet=True,
                     label='shot', color='#cb5a4c', ax=axs['pitch'])
       pitch.scatter(df_team1.x, df_team1.y, s=600, c=COLOR_1, label='Attacker', ax=axs['pitch'])
       pitch.scatter(df_team2.x, df_team2.y, s=600, c=COLOR_2, label='Defender', ax=axs['pitch'])
@@ -49,7 +49,7 @@ def make_graph(ids, ff, title, padding=[None,None,None,None]):
                     label='shot', color='#cb5a4c', ax=axs['pitch'])
       pitch.scatter(df_shot_event.location.item()[0], df_shot_event.location.item()[-1], c = COLOR_1, marker='football',
                       s=600, ax=axs['pitch'], label='Shooter', zorder=1.2)
-      pitch.scatter(df_shot_event.pass_end_location.item()[0], df_shot_event.pass_end_location.item()[0], s=600, c=COLOR_1, label='Reciver', ax=axs['pitch'])
+      pitch.scatter(df_shot_event.pass_end_location.item()[0], df_shot_event.pass_end_location.item()[-1], s=600, c=COLOR_1, label='Reciver', ax=axs['pitch'])
       pitch.annotate(df_shot_event.player.item(), (df_shot_event.location.item()[0] - C, df_shot_event.location.item()[-1]),
                    va='top', ha='center', color='black', fontsize=10, ax=axs['pitch'])
       if 'pass_recipient' in df_shot_event.columns:
